@@ -34,7 +34,7 @@ async function postPredictHandler(request, h) {
 }
 
 async function getHistoriesHandler(request, h) {
-  const db = new Firestore();
+  const db = new Firestore({ databaseId: 'asclepius' });
   const predictCollection = db.collection("predictions");
   const predictSnapshot = await predictCollection.get();
 
