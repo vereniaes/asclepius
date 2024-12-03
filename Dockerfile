@@ -10,6 +10,6 @@ COPY . .
 
 ENV PORT=3000
 
-ENV MODEL_URL='https://storage.googleapis.com/submission-asclepius-101/submissions-model/model.json'
+ENV MODEL_URL='https://storage.googleapis.com/dicoding-asclepius-machinelearning/model.json'
 
 CMD ["npm", "start"]
