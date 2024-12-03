@@ -34,11 +34,7 @@ async function postPredictHandler(request, h) {
 }
 
 async function getHistoriesHandler(request, h) {
-  const db = new Firestore({
-    keyFilename:
-      "/home/vereniaes/dicoding/asclepius/backend-api/submissionmlgc-titasari-22d7a75448fb.json",
-    projectId: "submissionmlgc-titasari",
-  });
+  const db = new Firestore();
   const predictCollection = db.collection("predictions");
   const predictSnapshot = await predictCollection.get();
 
