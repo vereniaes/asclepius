@@ -9,21 +9,26 @@ async function predictClassification(model, image) {
       .expandDims()
       .toFloat();
 
+    const classes = ["Cancer", "Non-cancer"];
+
     const prediction = model.predict(tensor);
     const score = await prediction.data();
-    const confidenceScore = Math.max(...score) * 100;
 
-    let result, suggestion;
+    const confidenceScore = score[0] * 100;
+    const label = score[0] > 0.5 ? classes[0] : classes[1];
 
-    if (confidenceScore > 50) {
-      result = "Cancer";
+    let suggestion;
+
+    if (label === "Cancer") {
       suggestion = "Segera periksa ke dokter!";
-    } else {
-      result = "Non-cancer";
-      suggestion = "Anda sehat!";
     }
 
-    return { result, suggestion };
+    if (label === "Non-cancer") {
+      suggestion = "Selamat anda masih sehat!";
+    }
+
+
+    return {  confidenceScore, label, suggestion };
   } catch (error) {
     throw new InputError(`Terjadi kesalahan input: ${error.message}`);
   }
